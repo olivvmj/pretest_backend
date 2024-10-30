@@ -63,4 +63,19 @@ class AuthController extends Controller
             ]);
         }
     }
+
+    public function logout(Request $request)
+    {
+        // Mengambil token pengguna saat ini
+        $user = Auth::user();
+        $token = $request->user()->currentAccessToken();
+
+        // Menghapus token
+        $token->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil Logout',
+        ]);
+    }
 }
