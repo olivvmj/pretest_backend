@@ -8,9 +8,18 @@ use Illuminate\Support\Facades\Auth;
 
 class TokoController extends Controller
 {
-    /**
-     * Menambahkan toko baru.
-     */
+
+    public function index()
+    {
+        $user_id = Auth::id();
+        $tokos = Toko::where('user_id', $user_id)->get();
+
+        return response()->json([
+            'message' => 'Daftar toko berhasil diambil!',
+            'data' => $tokos,
+        ]);
+    }
+
     public function store(Request $request)
     {
         // Validasi input
